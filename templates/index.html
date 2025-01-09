@@ -2,20 +2,21 @@
 
 {% block content %}
 <div class="flex justify-center items-center min-h-screen">
-    <form method="POST" class="w-full max-w-lg text-center" id="searchForm">
-        <div class="flex items-center w-3/4">
-        <input type="text" name="search" placeholder="Search for a meal..." class="w-full px-4 py-2 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
-        <a href="/random" class="mt-4 block w-full px-4 py-2 rounded-lg opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50">
-            <img class="w-10 py-2 h-auto" src="/static/images/randombutton.png" alt="random button">
+    <form method="POST" class="w-10/12 focus:w-11/12 text-center rounded-lg" id="searchForm">
+        <input type="text" name="search" placeholder="Search for a meal..." class="w-full px-4 py-2 rounded-lg text-lg focus:outline-none focus:border-transparent focus:text-pink-500 transition-colors" required>
+        <div class="flex items-center mt-4 p-2">
+        <a href="/random" class="block p-1 w-fit rounded-lg opacity-70 hover:opacity-100 focus:outline-none">
+            <img class="w-10 h-auto" src="/static/images/randombutton.png" alt="random button">
         </a>
+        <button type="submit" class="w-full bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">Search</button>
         </div>
-        <button type="submit" class="mt-4 w-full bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">Search</button>
 
     </form>
 </div>
 
-<div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="mealsContainer">
+
 {% if meals %}
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="mealsContainer">
     {% for meal in meals %}
     <div class="bg-white p-4 rounded-lg shadow-md">
         <a href="/{{ meal.idMeal }}"><h2 class="text-xl font-bold">{{ meal.strMeal }}</h2></a>
@@ -23,13 +24,18 @@
         <p class="mt-2">{{ meal.strInstructions[:100] }}...</p>
     </div>
     {% endfor %}
-{% else %}
-    <p class="flex text-center text-xs italic">...it sure is empty in here...</p>
-{% endif %}
 </div>
+{% else %}
+    <p class="flex w-full text-center text-xs italic">...it sure is empty in here...</p>
+{% endif %}
+
 <script>
     document.getElementById('searchForm').classList.remove('min-h-screen');
     document.getElementById('searchForm').classList.add('sticky', 'top-0', 'bg-white', 'shadow-lg');
+
+    var mealContainer = document.getElementById('mealsContainer');
+    if (mealContainer){
+        mealContainer.scrollIntoView('smooth');
+    };
 </script>
 {% endblock %}
-

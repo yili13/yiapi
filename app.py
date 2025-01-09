@@ -34,8 +34,7 @@ def random_meal():
 
 
 
-# todo: random url
-# make the form wider, make it scroll down on submit, spinner, search bar turned to nav bar and make independent meal page
+# make the form wider, make it scroll down on submit, spinner, search bar turned to nav bar
 if __name__ == '__main__':
     app.run(debug=True)
 
